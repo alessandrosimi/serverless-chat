@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Serverless Chat</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <style TYPE="text/css">
+            input[type=button] {
+                margin: 10px 0px;
+            }
+            body {
+                background-image: url('background.jpg');
+                background-attachment: fixed;
+            }
+            .connect {
+                height: 100%;
+                font-size: 20px;
+            }
+            .connect .login {
+                text-align: center;
+                margin-top: 40%;
+            }
+            .connect .get-key {
+                text-align: center;
+                margin-top: 40%;
+            }
+            .connect .ing {
+                text-align: center;
+                margin-top: 40%;
+            }
+            .hidden {
+                display: none;
+            }
+            .header {
+                height: 80px;
+                text-align: center;
+                z-index: 1031;
+            }
+            .container {
+                background-color: white;
+            }
+            .container {
+                width: 400px;
+            }
+            @media(max-width: 400px) {
+               .container {
+                    width: 100%;
+                }
+            }
+            .content {
+                background-color: #eee;
+                margin-top: 80px;
+                position: relative;
+                z-index: 50;
+            }
+            .content-back {
+                background-color: #eee;
+                height: 100%;
+                z-index: 49;
+            }
+            .footer {
+                height: 60px;
+                padding-top: 15px;
+            }
+            .footer input {
+                width: 70%;
+                height: 30px;
+                padding: 5px;
+                margin-top: 2px;
+            }
+            .footer button {
+                width: 25%;
+            }
+            @media(max-width: 300px) {
+                .footer button i {
+                    display: none;
+                }
+            }
+            .glyphicon-spin {
+                margin-top: 20px;
+                display: block;
+                -webkit-animation: spin 1000ms infinite linear;
+                animation: spin 1000ms infinite linear;
+            }
+            @-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+                100% {
+                    -webkit-transform: rotate(359deg);
+                    transform: rotate(359deg);
+                }
+            }
+            @keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+                100% {
+                    -webkit-transform: rotate(359deg);
+                    transform: rotate(359deg);
+                }
+            }
+
+            #messages {
+                padding: 10px;
+            }
+
+            .message.left {
+                text-align: left;
+            }
+
+            .message.right {
+                text-align: right;
+            }
+
+            .message .user {
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            .message .text {
+                font-size: 14px;
+                margin-bottom: 4px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="header navbar-fixed-top container">
+            <div class="row">
+                <h2>Server<i class="glyphicon glyphicon-flash" style="color: #ff8300;"></i>less Chat</h2>
+            </div>
+        </div>
+        <div class="content-back navbar-fixed-top container"></div>
+        <div class="content container">
+            <div id="messages">
+            </div>
+        </div>
+        <div class="footer navbar-fixed-bottom container">
+            <input id="message" type="text" />
+            <button id="btn-send" type="button" class="btn btn-primary pull-right" value='Send Message'>
+                Send <i class="glyphicon glyphicon-send"></i>
+            </button>
+        </div>
+        <div class="connect navbar-fixed-top container">
+            <div class="login">
+                Welcome to serverless chat<br/>
+                <input id="username" type="text" />
+                <input id="btn-login" type="button" class="btn btn-primary" value='Login'>
+            </div>
+            <div class="get-key hidden">
+                I'm getting the access keys ... <i class="glyphicon glyphicon-refresh glyphicon-spin"></i>
+            </div>
+            <div class="ing hidden">
+                I'm connecting to the chat ... <i class="glyphicon glyphicon-refresh glyphicon-spin"></i>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            var endpointCode = window.location.href.substring(window.location.href.indexOf('?') + 1);
+            window.lambdaEndpoint = 'https://' + endpointCode + '.execute-api.us-east-1.amazonaws.com/dev/iot/keys';
+        </script>
+        <script src="bundle.js"></script> <!-- IoT -->
+    </body>
+</html>
